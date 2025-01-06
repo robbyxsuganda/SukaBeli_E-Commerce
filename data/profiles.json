@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "phoneNumber": "Robby Suganda",
+    "address": "robbysugandaaa@gmail.com",
+    "photo": "12345678",
+    "UserId": 1
+  },
+  {
+    "id": 2,
+    "phoneNumber": "Noval",
+    "address": "novaldilano@gmail.com",
+    "photo": "abcdefg",
+    "UserId": 2
+  },
+  {
+    "id": 3,
+    "phoneNumber": "Firman",
+    "address": "firman@gmail.com",
+    "photo": "qwerty",
+    "UserId": 3
+  },
+  {
+    "id": 4,
+    "phoneNumber": "Customer1",
+    "address": "customer1@gmail.com",
+    "photo": "asda$@#1s",
+    "UserId": 4
+  },
+  {
+    "id": 5,
+    "phoneNumber": "Customer2",
+    "address": "customer2@gmail.com",
+    "photo": "tas@#ASE42",
+    "UserId": 5
+  }
+]
