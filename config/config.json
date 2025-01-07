@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "robbysuganda",
-    "password": "",
+    "username": "postgres",
+    "password": "12345",
     "database": "suka-beli-db",
     "host": "127.0.0.1",
     "dialect": "postgres"
