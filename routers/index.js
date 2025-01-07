@@ -1,8 +1,10 @@
 const router = require("express").Router();
-// const storeRoute = require("./storeRoute");
-// const employeeRoute = require("./employeeRoute");
+const Controller = require("../controllers/Controller");
+const adminRoute = require("./adminRoute");
+const customerRoute = require("./customerRoute");
 
-// router.use(storeRoute);
-// router.use(employeeRoute);
+router.use(adminRoute);
+router.use(customerRoute);
+router.get("/profile", Controller.readProfile);
 
 module.exports = router;
