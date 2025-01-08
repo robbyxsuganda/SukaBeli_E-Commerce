@@ -1,16 +1,24 @@
 const { Op } = require("sequelize");
 const rupiahFormatter = require("../helpers/rupiahFormatter.js");
-const { Product, User } = require("../models/index.js");
+const { Product, User, Category, ProductsCategory } = require("../models/index.js");
 
 class ControllerCustomer {
   static async readProducts(req, res) {
     try {
-      // res.send(products);
-      // res.send("Menampilkan semua product yang ada");
-      const { search } = req.query;
+      const { search, category } = req.query;
 
-      const options = {};
-
+      const options = {
+        include: [
+          {
+            model: User,
+            require: true,
+          },
+          //   {
+          //     model: Profil,
+          //   },
+          //   Qux,
+        ],
+      };
       if (search) {
         options.where = {
           name: {
@@ -18,8 +26,24 @@ class ControllerCustomer {
           },
         };
       }
+
       const products = await Product.findAll(options);
-      res.render("customer/index.ejs", { products, rupiahFormatter });
+
+      const categories = await Category.findAll({
+        include: {
+          model: Product,
+          through: ProductsCategory,
+        },
+      });
+
+      if (category) {
+        options.where = {
+          name: category,
+        };
+      }
+      // res.send(categories);
+
+      res.render("customer/index.ejs", { products, rupiahFormatter, categories });
     } catch (error) {
       console.log(error);
       res.send(error);
@@ -45,7 +69,6 @@ class ControllerCustomer {
 
   static async readProductDetail(req, res) {
     try {
-      
       res.render("customer/productDetail.ejs");
       // res.send("Membeli semua product dicarts dan mengupdate data");
     } catch (error) {
