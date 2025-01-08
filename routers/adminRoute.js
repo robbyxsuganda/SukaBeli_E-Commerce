@@ -3,7 +3,7 @@ const ControllerAdmin = require("../controllers/ControllerAdmin");
 const router = require("express").Router();
 
 //READ
-router.get("/", ControllerAdmin.readProducts);
+router.get("/admin", ControllerAdmin.readProducts);
 
 //CREATE
 router.get("/product/add", ControllerAdmin.showAddProductForm);

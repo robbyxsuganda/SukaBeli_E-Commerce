@@ -3,7 +3,6 @@ const ControllerCustomer = require("../controllers/ControllerCustomer");
 const router = require("express").Router();
 
 //READ
-router.get("/", ControllerCustomer.readProducts);
 router.get("/product/cart", ControllerCustomer.readCarts);
 router.get("/product/cart/checkout", ControllerCustomer.checkoutAllProduct);
 router.get("/product/:id", ControllerCustomer.readProductDetail);
