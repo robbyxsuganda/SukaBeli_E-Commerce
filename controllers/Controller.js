@@ -35,6 +35,7 @@ class Controller {
         const isValidPassword = bcryptjs.compareSync(password, user.password);
         if (isValidPassword) {
           req.session.user = { id: user.id, role: user.role, email: user.email };
+          req.session.userId = user.id;
           if (user.role === "Admin") {
             return res.redirect("/admin");
           } else if (user.role === "Customer") {

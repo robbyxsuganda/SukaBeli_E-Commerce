@@ -7,7 +7,7 @@ const router = require("express").Router();
 router.get("/", isCustomer, ControllerCustomer.readProducts);
 router.get("/product/cart", isCustomer, ControllerCustomer.readCarts);
 router.get("/product/cart/checkout", isCustomer, ControllerCustomer.checkoutAllProduct);
-router.get("/product/:id", isCustomer, ControllerCustomer.readProductDetail);
+router.get("/product/:id", isCustomer, ControllerCustomer.readProductDetail); // done
 
 //CREATE
 router.get("/product/:id/addCart", isCustomer, ControllerCustomer.addToCart);

@@ -1,4 +1,4 @@
-const { Product, User, Category, ProductsCategory, Profile } = require("../models/index.js");
+const { Product, User, Category, ProductsCategory, Profile, Cart } = require("../models/index.js");
 const { Op } = require("sequelize");
 const rupiahFormatter = require("../helpers/rupiahFormatter.js");
 
@@ -66,7 +66,14 @@ class ControllerCustomer {
 
   static async readProductDetail(req, res) {
     try {
-      res.render("customer/productDetail.ejs");
+      const { id } = req.params;
+      const product = await Product.findOne({
+        where: {
+          id: id,
+        },
+        include: [Category, User],
+      });
+      res.render("customer/productDetail.ejs", { product, rupiahFormatter });
       // res.send("Membeli semua product dicarts dan mengupdate data");
     } catch (error) {
       res.send(error);
@@ -75,8 +82,37 @@ class ControllerCustomer {
 
   static async addToCart(req, res) {
     try {
-      res.send("Menambahkan product kedalam cart");
+      const { id } = req.params;
+      const { userId } = req.session;
+
+      const findCart = await Cart.findOne({
+        where: { ProductId: id, UserId: userId },
+        include: {
+          model: Product,
+          attributes: ["id", "name", "price", "description", "stock"],
+        },
+      });
+
+      if (findCart) {
+        await Cart.increment(
+          { stockProduct: 1 },
+          {
+            where: { ProductId: id, UserId: userId },
+          }
+        );
+      } else {
+        await Cart.create({
+          UserId: userId,
+          ProductId: id,
+          stockProduct: 1,
+        });
+      }
+
+      res.redirect(`/customer/product/${id}`);
+      // res.send("Menambahkan product kedalam cart");
     } catch (error) {
+      console.log(error);
+
       res.send(error);
     }
   }

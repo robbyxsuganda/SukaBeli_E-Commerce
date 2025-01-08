@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasOne(models.Profile, { foreignKey: "UserId" });
       User.hasMany(models.Product, { foreignKey: "UserId" });
+      User.hasMany(models.Cart, { foreignKey: "UserId" });
+      User.belongsToMany(models.Product, { through: "Cart" });
     }
   }
   User.init(
@@ -28,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User.beforeCreate((instance) => {
-    const salt = bcrypt.genSaltSync(10)
+    const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(instance.password, salt);
     instance.password = hash;
   });
