@@ -31,20 +31,20 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
       <div class="container">
-        <a class="navbar-brand fw-bold" href="#">Suka Beli</a>
+        <a class="navbar-brand fw-bold" href="/customer">Suka Beli</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Cart</a>
+              <a class="nav-link active" href="/customer/product/cart">Cart</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Profile </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Logout</a></li>
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -55,46 +55,36 @@
         </div>
       </div>
     </nav>
-
+    <!-- <%= JSON.stringify(carts) %>  -->
+    <% if (carts.length > 0) { %>
     <!-- Cart Section -->
     <div class="container mt-4">
       <h3 class="fw-bold">Keranjang Belanja</h3>
       <div class="row">
         <!-- Cart Items -->
         <div class="col-md-8">
+          <% carts.forEach(c => { %>
           <div class="cart-item d-flex align-items-center">
-            <img src="https://via.placeholder.com/100" alt="Product Image" class="img-fluid rounded me-3" style="width: 100px; height: 100px; object-fit: cover" />
+            <img src="https://via.placeholder.com/100" alt="<%= c.Product.name %>" class="img-fluid rounded me-3" style="width: 100px; height: 100px; object-fit: cover" />
             <div class="flex-grow-1">
-              <h5 class="mb-1">Produk 1</h5>
-              <p class="text-muted mb-1">Rp200.000</p>
+              <h5 class="mb-1"><%= c.Product.name %></h5>
+              <p class="text-muted mb-1"><%= rupiahFormatter(c.Product.price) %></p>
               <div class="d-flex align-items-center">
-                <button class="btn btn-sm btn-outline-secondary me-2">-</button>
-                <span>1</span>
-                <button class="btn btn-sm btn-outline-secondary ms-2">+</button>
+                <a href="/customer/product/<%= c.ProductId %>/incrementStock">
+                  <button class="btn btn-sm btn-outline-secondary me-2">+</button>
+                </a>
+                <span><%= c.stockProduct %></span>
+                <a href="/customer/product/<%= c.ProductId %>/decrementStock">
+                  <button class="btn btn-sm btn-outline-secondary ms-2">-</button>
+                </a>
               </div>
             </div>
             <div>
-              <p class="mb-0 fw-bold">Rp200.000</p>
-              <button class="btn btn-link text-danger p-0">Hapus</button>
+              <p class="mb-0 fw-bold"><%= rupiahFormatter(c.Product.price) %></p>
+              <a href="/customer/product/<%= c.Product.id %>/delete"><button class="btn btn-link text-danger p-0">Hapus</button></a>
             </div>
           </div>
-
-          <div class="cart-item d-flex align-items-center">
-            <img src="https://via.placeholder.com/100" alt="Product Image" class="img-fluid rounded me-3" style="width: 100px; height: 100px; object-fit: cover" />
-            <div class="flex-grow-1">
-              <h5 class="mb-1">Produk 2</h5>
-              <p class="text-muted mb-1">Rp300.000</p>
-              <div class="d-flex align-items-center">
-                <button class="btn btn-sm btn-outline-secondary me-2">-</button>
-                <span>1</span>
-                <button class="btn btn-sm btn-outline-secondary ms-2">+</button>
-              </div>
-            </div>
-            <div>
-              <p class="mb-0 fw-bold">Rp300.000</p>
-              <button class="btn btn-link text-danger p-0">Hapus</button>
-            </div>
-          </div>
+          <% }) %>
         </div>
 
         <!-- Order Summary -->
@@ -112,9 +102,16 @@
         </div>
       </div>
     </div>
+    <% } else { %>
+    <div class="container mt-4 text-center">
+      <h3 class="fw-bold">Keranjang Belanja Kosong</h3>
+      <p class="text-muted">Yuk, tambahkan produk ke keranjangmu!</p>
+      <a href="/customer" class="btn btn-primary">Belanja Sekarang</a>
+    </div>
+    <% } %>
 
     <!-- Footer -->
-    <footer class="bg-light text-center text-lg-start mt-5 py-4">
+    <footer class="bg-light text-center mt-5 py-4">
       <div class="container">
         <p class="mb-0">&copy; 2025 Suka Beli. All Rights Reserved.</p>
       </div>

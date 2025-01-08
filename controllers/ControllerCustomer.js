@@ -49,8 +49,21 @@ class ControllerCustomer {
 
   static async readCarts(req, res) {
     try {
-      // res.send("Menampilkan carts");
-      res.render("customer/carts.ejs");
+      const carts = await Cart.findAll({
+        include: {
+          model: Product,
+          attributes: ["id", "name", "price", "description", "stock"],
+        },
+        where: {
+          stockProduct: {
+            [Op.gt]: 0,
+          },
+        },
+        order: [["createdAt", "DESC"]],
+      });
+
+      res.render("customer/carts.ejs", { carts, rupiahFormatter });
+      // res.send("Menampilkan carts");]
     } catch (error) {
       res.send(error);
     }
@@ -119,7 +132,13 @@ class ControllerCustomer {
 
   static async incrementStock(req, res) {
     try {
-      res.send("Mengurangi jumlah stock pada cart");
+      const { id } = req.params;
+      const { userId } = req.session;
+
+      await Cart.increment({ stockProduct: 1 }, { where: { ProductId: id, UserId: userId } });
+
+      res.redirect("/customer/product/cart");
+      // res.send("Mengurangi jumlah stock pada cart");
     } catch (error) {
       res.send(error);
     }
@@ -127,15 +146,32 @@ class ControllerCustomer {
 
   static async decrementStock(req, res) {
     try {
-      res.send("Mengurangi jumlah stock pada cart");
+      const { id } = req.params;
+      const { userId } = req.session;
+
+      await Cart.increment({ stockProduct: -1 }, { where: { ProductId: id, UserId: userId } });
+
+      res.redirect("/customer/product/cart");
+      // res.send("Mengurangi jumlah stock pada cart");
     } catch (error) {
       res.send(error);
     }
   }
 
-  static async deleteFromCart(req, res) {
+  static async deleteCart(req, res) {
     try {
-      res.send("Menghapus data di cart");
+      const { id } = req.params;
+      const { userId } = req.session;
+
+      await Cart.destroy({
+        where: {
+          ProductId: id,
+          UserId: userId,
+        },
+      });
+
+      res.redirect("/customer/product/cart");
+      // res.send("Menghapus data di cart");
     } catch (error) {
       res.send(error);
     }
