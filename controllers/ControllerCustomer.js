@@ -1,12 +1,25 @@
-const { Product } = require("../models/index.js");
+const { Op } = require("sequelize");
+const rupiahFormatter = require("../helpers/rupiahFormatter.js");
+const { Product, User } = require("../models/index.js");
 
 class ControllerCustomer {
   static async readProducts(req, res) {
     try {
-      // const products = await Product.findAll()
-      // res.send(products)
+      // res.send(products);
       // res.send("Menampilkan semua product yang ada");
-      res.render("customer/index.ejs");
+      const { search } = req.query;
+
+      const options = {};
+
+      if (search) {
+        options.where = {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
+        };
+      }
+      const products = await Product.findAll(options);
+      res.render("customer/index.ejs", { products, rupiahFormatter });
     } catch (error) {
       console.log(error);
       res.send(error);
@@ -32,6 +45,7 @@ class ControllerCustomer {
 
   static async readProductDetail(req, res) {
     try {
+      
       res.render("customer/productDetail.ejs");
       // res.send("Membeli semua product dicarts dan mengupdate data");
     } catch (error) {
