@@ -22,20 +22,20 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
       <div class="container">
-        <a class="navbar-brand fw-bold" href="#">Suka Beli</a>
+        <a class="navbar-brand fw-bold" href="/admin">Suka Beli</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Add Product</a>
+              <a class="nav-link active" href="/admin/product/add">Add Product</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Profile </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Logout</a></li>
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -67,8 +67,8 @@
               <h5 class="card-title">Produk 4</h5>
               <p class="card-text">Rp400.000</p>
               <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-primary w-50 me-1">Edit</a>
-                <a href="#" class="btn btn-danger w-50 ms-1">Delete</a>
+                <a href="/admin/product/1/edit" class="btn btn-primary w-50 me-1">Edit</a>
+                <a href="/admin/product/2/delete" class="btn btn-danger w-50 ms-1">Delete</a>
               </div>
             </div>
           </div>

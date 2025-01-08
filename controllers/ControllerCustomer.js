@@ -1,8 +1,52 @@
+const { Product, User, Category, ProductsCategory, Profile } = require("../models/index.js");
 const { Op } = require("sequelize");
 const rupiahFormatter = require("../helpers/rupiahFormatter.js");
-const { Product, User, Category, ProductsCategory } = require("../models/index.js");
 
 class ControllerCustomer {
+  static async readProducts(req, res) {
+    try {
+      const { search, CategoryId } = req.query;
+
+      const options = {
+        include: [
+          {
+            model: User,
+            require: true,
+          },
+        ],
+        order: [["createdAt", "ASC"]],
+      };
+      if (search) {
+        options.where = {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
+        };
+      }
+
+      const products = await Product.findAll(options);
+
+      const categories = await Category.findAll({
+        include: {
+          model: Product,
+          through: ProductsCategory,
+        },
+      });
+
+      // if (CategoryId) {
+      //   options.where = {
+      //     name: category,
+      //   };
+      // }
+      // res.send(categories);
+
+      res.render("customer/index.ejs", { products, rupiahFormatter, categories });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+
   static async readCarts(req, res) {
     try {
       // res.send("Menampilkan carts");

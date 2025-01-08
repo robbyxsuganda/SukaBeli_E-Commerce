@@ -38,13 +38,16 @@
         font-weight: 600;
         color: #333;
       }
+      a {
+        text-decoration: none;
+      }
     </style>
   </head>
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
       <div class="container">
-        <a class="navbar-brand fw-bold" href="/customer">Suka Beli</a>
+        <a class="navbar-brand fw-bold" href="/">Suka Beli</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -53,18 +56,13 @@
             <li class="nav-item">
               <a class="nav-link active" href="/customer/product/cart">Cart</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Profile </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                <li><a class="dropdown-item" href="/logout">Logout</a></li>
-              </ul>
-            </li>
           </ul>
-          <form class="d-flex" method="get" action="/customer">
-            <input class="form-control me-2" type="search" placeholder="Cari produk" aria-label="Search" name="search" />
-            <button class="btn btn-outline-primary" type="submit">Search</button>
+          <form class="d-flex" method="get" action="/">
+            <input class="form-control me-4" type="search" placeholder="Cari produk" aria-label="Search" name="search" />
+            <!-- <button class="btn btn-outline-primary" type="submit">Search</button> -->
           </form>
+          <a href="/login"> <button class="btn btn-outline-primary me-2" type="button">Login</button></a>
+          <a href="/register"> <button class="btn btn-primary" type="button">Register</button></a>
         </div>
       </div>
     </nav>
@@ -90,7 +88,7 @@
           <div class="carousel-item active">
             <div class="row g-4">
               <div class="col-3">
-                <a href="/customer">
+                <a href="/">
                   <div class="kategori-card">
                     <h5>All</h5>
                   </div>

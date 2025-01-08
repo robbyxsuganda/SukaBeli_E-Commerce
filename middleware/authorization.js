@@ -8,7 +8,7 @@ const isLoggedIn = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-  if (req.session.user && req.session.user.role !== "Admin") {
+  if (req.session.user.role !== "Admin") {
     const error = "Kamu tidak memiliki access";
     res.redirect(`/login?error=${error}`);
   } else {
@@ -17,7 +17,7 @@ const isAdmin = (req, res, next) => {
 };
 
 const isCustomer = (req, res, next) => {
-  if (req.session.user && req.session.user.role !== "Customer") {
+  if (req.session.user.role !== "Customer") {
     const error = "Kamu tidak memiliki access";
     res.redirect(`/login?error=${error}`);
   } else {

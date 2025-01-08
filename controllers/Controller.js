@@ -37,6 +37,8 @@ class Controller {
           req.session.user = { id: user.id, role: user.role, email: user.email };
           if (user.role === "Admin") {
             return res.redirect("/admin");
+          } else if (user.role === "Customer") {
+            return res.redirect("/customer");
           } else {
             return res.redirect("/");
           }
@@ -104,11 +106,8 @@ class Controller {
             model: User,
             require: true,
           },
-          //   {
-          //     model: Profil,
-          //   },
-          //   Qux,
         ],
+        order: [["createdAt", "ASC"]],
       };
       if (search) {
         options.where = {
@@ -134,7 +133,7 @@ class Controller {
       // }
       // res.send(categories);
 
-      res.render("customer/index.ejs", { products, rupiahFormatter, categories });
+      res.render("index.ejs", { products, rupiahFormatter, categories });
     } catch (error) {
       console.log(error);
       res.send(error);
