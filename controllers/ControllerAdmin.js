@@ -1,7 +1,8 @@
 class ControllerAdmin {
   static async readProducts(req, res) {
     try {
-      res.send("Menampilkan semua product milik si admin");
+      // res.send("Menampilkan semua product milik si admin");
+      res.render("admin/index.ejs");
     } catch (error) {
       res.send(error);
     }
@@ -9,7 +10,8 @@ class ControllerAdmin {
 
   static async showAddProductForm(req, res) {
     try {
-      res.send("Menampilkan form untuk tambah product");
+      res.render("admin/addProductForm.ejs");
+      // res.send("Menampilkan form untuk tambah product");
     } catch (error) {
       res.send(error);
     }
