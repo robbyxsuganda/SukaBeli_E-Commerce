@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
       Product.hasMany(models.Cart, { foreignKey: "ProductId" });
       Product.belongsToMany(models.User, { through: "Cart" });
     }
+
+    // STATIC METHOD
+    
   }
   Product.init(
     {

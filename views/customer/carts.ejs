@@ -55,7 +55,7 @@
         </div>
       </div>
     </nav>
-    <!-- <%= JSON.stringify(carts) %>  -->
+    <%= JSON.stringify(carts) %> 
     <% if (carts.length > 0) { %>
     <!-- Cart Section -->
     <div class="container mt-4">
@@ -96,7 +96,7 @@
                 <p class="mb-0">Total Harga:</p>
                 <p class="mb-0 fw-bold">Rp500.000</p>
               </div>
-              <button class="btn btn-checkout w-100 mt-3">Checkout</button>
+              <a href="/customer/product/cart/checkout"><button class="btn btn-checkout w-100 mt-3">Checkout</button></a>
             </div>
           </div>
         </div>
