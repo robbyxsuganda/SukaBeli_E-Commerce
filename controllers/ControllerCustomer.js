@@ -5,7 +5,7 @@ const { Product, User, Category, ProductsCategory } = require("../models/index.j
 class ControllerCustomer {
   static async readProducts(req, res) {
     try {
-      const { search, category } = req.query;
+      const { search, CategoryId } = req.query;
 
       const options = {
         include: [
@@ -36,11 +36,11 @@ class ControllerCustomer {
         },
       });
 
-      if (category) {
-        options.where = {
-          name: category,
-        };
-      }
+      // if (CategoryId) {
+      //   options.where = {
+      //     name: category,
+      //   };
+      // }
       // res.send(categories);
 
       res.render("customer/index.ejs", { products, rupiahFormatter, categories });
