@@ -71,6 +71,15 @@
             <input type="number" class="form-control" name="stock" id="stock" placeholder="Masukkan jumlah stok" required />
           </div>
           <div class="mb-3">
+            <label for="stock" class="form-label">Category</label>
+            <select name="CategoryId" id="CategoryId" class="form-control">
+              <option selected hidden disabled>--Select Category--</option>
+              <% categories.forEach(c => { %>
+              <option value="<%= c.id %>"><%= c.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="mb-3">
             <label for="image" class="form-label">Gambar Produk</label>
             <input type="file" class="form-control" name="image" id="image" accept="image/*" required />
           </div>

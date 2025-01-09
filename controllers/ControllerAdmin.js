@@ -1,6 +1,13 @@
 const { Product, User, Category, ProductsCategory, Profile, Cart } = require("../models/index.js");
 const { Op } = require("sequelize");
 const rupiahFormatter = require("../helpers/rupiahFormatter.js");
+const ImageKit = require("imagekit");
+
+const imagekit = new ImageKit({
+  publicKey: "public_Y/YZ4FXQ7A1LZgggMCB1pqcgIWA=",
+  privateKey: "private_CvjVhs5BI8eR1hsdqi+eVHnsTbs=",
+  urlEndpoint: "https://ik.imagekit.io/dm8xthnq9/",
+});
 
 class ControllerAdmin {
   static async readProducts(req, res) {
@@ -12,7 +19,7 @@ class ControllerAdmin {
       });
 
       // res.send("Menampilkan semua product milik si admin");
-      res.render("admin/index.ejs", { userWithProducts });
+      res.render("admin/index.ejs", { userWithProducts, rupiahFormatter });
     } catch (error) {
       res.send(error);
     }
@@ -20,7 +27,8 @@ class ControllerAdmin {
 
   static async showAddProductForm(req, res) {
     try {
-      res.render("admin/addProductForm.ejs");
+      const categories = await Category.findAll();
+      res.render("admin/addProductForm.ejs", { categories });
       // res.send("Menampilkan form untuk tambah product");
     } catch (error) {
       res.send(error);
@@ -29,8 +37,27 @@ class ControllerAdmin {
 
   static async addProduct(req, res) {
     try {
-      const { name, description, price, stock } = req.body;
-      res.send(name, description, price, stock);
+      const { name, price, stock, description, CategoryId } = req.body;
+
+      const data = await imagekit.upload({
+        file: req.file.buffer, //required
+        fileName: req.file.originalname, //required
+      });
+
+      const newProduct = await Product.create({
+        name,
+        price,
+        stock,
+        description,
+        image: data.url,
+        UserId: req.session.userId,
+      });
+
+      await ProductsCategory.create({
+        CategoryId: CategoryId,
+        ProductId: newProduct.id,
+      });
+      res.redirect("/admin");
     } catch (error) {
       res.send(error);
     }

@@ -5,7 +5,6 @@ const customerRoute = require("./customerRoute");
 const { isLoggedIn } = require("../middleware/authorization.js");
 
 const multer = require("multer");
-
 const storage = multer.memoryStorage();
 // Konfigurasi folder penyimpanan
 const upload = multer({ storage: storage });

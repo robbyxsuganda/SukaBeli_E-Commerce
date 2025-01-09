@@ -2,9 +2,9 @@ const { Product, User, Category, ProductsCategory, Profile } = require("../model
 const bcryptjs = require("bcryptjs");
 const { Op } = require("sequelize");
 const rupiahFormatter = require("../helpers/rupiahFormatter.js");
-var ImageKit = require("imagekit");
+const ImageKit = require("imagekit");
 
-var imagekit = new ImageKit({
+const imagekit = new ImageKit({
   publicKey: "public_Y/YZ4FXQ7A1LZgggMCB1pqcgIWA=",
   privateKey: "private_CvjVhs5BI8eR1hsdqi+eVHnsTbs=",
   urlEndpoint: "https://ik.imagekit.io/dm8xthnq9/",
@@ -46,7 +46,6 @@ class Controller {
   static async editProfile(req, res) {
     try {
       const { name, email, phoneNumber, address } = req.body;
-      req.session.email = email;
 
       const data = await imagekit.upload({
         file: req.file.buffer, //required
