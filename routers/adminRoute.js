@@ -4,11 +4,11 @@ const { isAdmin } = require("../middleware/authorization.js");
 const router = require("express").Router();
 
 //READ
-router.get("/", isAdmin, ControllerAdmin.readProducts);
+router.get("/", isAdmin, ControllerAdmin.readProducts); // done
 
 //CREATE
-router.get("/product/add", isAdmin, ControllerAdmin.showAddProductForm);
-router.post("/product/add", isAdmin, ControllerAdmin.addProduct);
+router.get("/product/add", isAdmin, ControllerAdmin.showAddProductForm); //done
+router.post("/product/add", isAdmin, ControllerAdmin.addProduct); //
 
 //UPDATE
 router.get("/product/:id/edit", isAdmin, ControllerAdmin.showEditProductForm);

@@ -57,31 +57,31 @@
     <div class="container">
       <div class="form-container">
         <h3 class="text-center fw-bold mb-4">Tambah Produk</h3>
-        <form>
+        <form action="/admin/product/add" method="post" enctype="multipart/form-data">
           <div class="mb-3">
-            <label for="productName" class="form-label">Nama Produk</label>
-            <input type="text" class="form-control" id="productName" placeholder="Masukkan nama produk" required />
+            <label for="name" class="form-label">Nama Produk</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Masukkan nama produk" required />
           </div>
           <div class="mb-3">
-            <label for="productPrice" class="form-label">Harga</label>
-            <input type="number" class="form-control" id="productPrice" placeholder="Masukkan harga produk" required />
+            <label for="price" class="form-label">Harga</label>
+            <input type="number" class="form-control" name="price" id="price" placeholder="Masukkan harga produk" required />
           </div>
           <div class="mb-3">
-            <label for="productStock" class="form-label">Stok</label>
-            <input type="number" class="form-control" id="productStock" placeholder="Masukkan jumlah stok" required />
+            <label for="stock" class="form-label">Stok</label>
+            <input type="number" class="form-control" name="stock" id="stock" placeholder="Masukkan jumlah stok" required />
           </div>
           <div class="mb-3">
-            <label for="productImage" class="form-label">Gambar Produk</label>
-            <input type="file" class="form-control" id="productImage" accept="image/*" required />
+            <label for="image" class="form-label">Gambar Produk</label>
+            <input type="file" class="form-control" name="image" id="image" accept="image/*" required />
           </div>
           <div class="mb-3">
-            <label for="productDescription" class="form-label">Deskripsi Produk</label>
-            <textarea class="form-control" id="productDescription" rows="4" placeholder="Masukkan deskripsi produk" required></textarea>
+            <label for="description" class="form-label">Deskripsi Produk</label>
+            <textarea class="form-control" id="description" name="description" rows="4" placeholder="Masukkan deskripsi produk" required></textarea>
           </div>
           <!-- Tombol Simpan dan Batal -->
           <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-submit">Simpan Produk</button>
-            <button type="button" class="btn btn-outline-secondary">Batal</button>
+            <button type="submit" class="btn btn-submit">Add Product</button>
+            <a href="/admin"><button type="button" class="btn btn-outline-secondary">Batal</button></a>
           </div>
         </form>
       </div>

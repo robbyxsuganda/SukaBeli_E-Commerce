@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Smart LED TV",
     "description": "55-inch 4K Ultra HD Smart LED TV with HDR and Voice Control",
-    "price": 699,
+    "price": 6990000,
     "stock": 50,
     "image": "https://picsum.photos/seed/tv1/300/200",
     "UserId": 1
@@ -12,7 +12,7 @@
     "id": 2,
     "name": "Wireless Bluetooth Headphones",
     "description": "Over-Ear Noise Cancelling Wireless Bluetooth Headphones",
-    "price": 249,
+    "price": 24900,
     "stock": 100,
     "image": "https://picsum.photos/seed/headphones1/300/200",
     "UserId": 2
@@ -21,7 +21,7 @@
     "id": 3,
     "name": "Smart Home Security Camera",
     "description": "1080p HD Indoor Wireless Security Camera with Night Vision",
-    "price": 39,
+    "price": 3900000,
     "stock": 75,
     "image": "https://picsum.photos/seed/camera1/300/200",
     "UserId": 3
@@ -30,7 +30,7 @@
     "id": 4,
     "name": "Robot Vacuum Cleaner",
     "description": "Wi-Fi Connected Robot Vacuum with Mapping Technology",
-    "price": 299,
+    "price": 299000,
     "stock": 30,
     "image": "https://picsum.photos/seed/vacuum1/300/200",
     "UserId": 4
@@ -39,7 +39,7 @@
     "id": 5,
     "name": "Classic Denim Jacket",
     "description": "Unisex Denim Jacket with Adjustable Waist Tabs",
-    "price": 59,
+    "price": 590000,
     "stock": 80,
     "image": "https://picsum.photos/seed/jacket1/300/200",
     "UserId": 1
@@ -48,7 +48,7 @@
     "id": 6,
     "name": "Leather Ankle Boots",
     "description": "Genuine Leather Ankle Boots with Side Zip",
-    "price": 89,
+    "price": 89000,
     "stock": 40,
     "image": "https://picsum.photos/seed/boots1/300/200",
     "UserId": 2
@@ -57,7 +57,7 @@
     "id": 7,
     "name": "Silk Scarf",
     "description": "100% Silk Square Scarf with Floral Print",
-    "price": 29,
+    "price": 290000,
     "stock": 60,
     "image": "https://picsum.photos/seed/scarf1/300/200",
     "UserId": 3
@@ -66,7 +66,7 @@
     "id": 8,
     "name": "Aviator Sunglasses",
     "description": "Classic Aviator Sunglasses with Polarized Lenses",
-    "price": 79,
+    "price": 79000,
     "stock": 90,
     "image": "https://picsum.photos/seed/sunglasses1/300/200",
     "UserId": 4
@@ -75,7 +75,7 @@
     "id": 9,
     "name": "Organic Quinoa",
     "description": "100% Organic White Quinoa, 1kg Pack",
-    "price": 12,
+    "price": 12000,
     "stock": 200,
     "image": "https://picsum.photos/seed/quinoa1/300/200",
     "UserId": 1
@@ -84,7 +84,7 @@
     "id": 10,
     "name": "Extra Virgin Olive Oil",
     "description": "Cold Pressed Extra Virgin Olive Oil, 500ml Bottle",
-    "price": 15,
+    "price": 15000,
     "stock": 150,
     "image": "https://picsum.photos/seed/oliveoil1/300/200",
     "UserId": 2
@@ -93,7 +93,7 @@
     "id": 11,
     "name": "Dark Chocolate Bar",
     "description": "72% Cocoa Dark Chocolate Bar, 100g",
-    "price": 4,
+    "price": 40000,
     "stock": 300,
     "image": "https://picsum.photos/seed/chocolate1/300/200",
     "UserId": 3
@@ -102,7 +102,7 @@
     "id": 12,
     "name": "Gourmet Coffee Beans",
     "description": "Single Origin Arabica Coffee Beans, 250g Bag",
-    "price": 18,
+    "price": 180000,
     "stock": 100,
     "image": "https://picsum.photos/seed/coffee1/300/200",
     "UserId": 4
@@ -111,7 +111,7 @@
     "id": 13,
     "name": "Yoga Mat",
     "description": "Non-Slip Exercise Yoga Mat with Carrying Strap",
-    "price": 25,
+    "price": 25000,
     "stock": 70,
     "image": "https://picsum.photos/seed/yogamat1/300/200",
     "UserId": 1
@@ -120,7 +120,7 @@
     "id": 14,
     "name": "Digital Body Weight Scale",
     "description": "Smart Digital Body Weight Scale with Bluetooth Connectivity",
-    "price": 45,
+    "price": 45000,
     "stock": 50,
     "image": "https://picsum.photos/seed/scale1/300/200",
     "UserId": 2
@@ -129,7 +129,7 @@
     "id": 15,
     "name": "Vitamin C Supplement",
     "description": "High Potency Vitamin C 1000mg, 100 Tablets",
-    "price": 20,
+    "price": 200000,
     "stock": 200,
     "image": "https://picsum.photos/seed/vitaminc1/300/200",
     "UserId": 3
@@ -138,7 +138,7 @@
     "id": 16,
     "name": "Foam Roller",
     "description": "High Density Foam Roller for Muscle Massage and Recovery",
-    "price": 35,
+    "price": 350000,
     "stock": 60,
     "image": "https://picsum.photos/seed/foamroller1/300/200",
     "UserId": 4
@@ -147,7 +147,7 @@
     "id": 17,
     "name": "Car Phone Mount",
     "description": "Universal Car Phone Mount with Adjustable Arm",
-    "price": 19,
+    "price": 190000,
     "stock": 120,
     "image": "https://picsum.photos/seed/phonemount1/300/200",
     "UserId": 1
@@ -156,7 +156,7 @@
     "id": 18,
     "name": "Synthetic Motor Oil",
     "description": "Full Synthetic Motor Oil 5W-30, 5 Quart Jug",
-    "price": 28,
+    "price": 28000,
     "stock": 80,
     "image": "https://picsum.photos/seed/motoroil1/300/200",
     "UserId": 2
@@ -165,7 +165,7 @@
     "id": 19,
     "name": "Portable Car Jump Starter",
     "description": "12V Portable Car Battery Jump Starter with USB Charging",
-    "price": 79,
+    "price": 79000,
     "stock": 40,
     "image": "https://picsum.photos/seed/jumpstarter1/300/200",
     "UserId": 3
@@ -174,7 +174,7 @@
     "id": 20,
     "name": "Car Wash Kit",
     "description": "Complete Car Wash and Wax Kit with Microfiber Cloths",
-    "price": 39,
+    "price": 39000,
     "stock": 65,
     "image": "https://picsum.photos/seed/carwash1/300/200",
     "UserId": 4

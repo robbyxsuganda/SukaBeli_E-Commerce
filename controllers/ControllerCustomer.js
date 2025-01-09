@@ -16,6 +16,7 @@ class ControllerCustomer {
         ],
         order: [["createdAt", "ASC"]],
       };
+
       if (search) {
         options.where = {
           name: {
@@ -32,13 +33,6 @@ class ControllerCustomer {
           through: ProductsCategory,
         },
       });
-
-      // if (CategoryId) {
-      //   options.where = {
-      //     name: category,
-      //   };
-      // }
-      // res.send(categories);
 
       res.render("customer/index.ejs", { products, rupiahFormatter, categories });
     } catch (error) {
@@ -107,10 +101,14 @@ class ControllerCustomer {
 
   static async buy(req, res) {
     try {
+      await Cart.destroy({
+        where: {
+          UserId: req.session.userId,
+        },
+      });
       res.redirect("/customer");
     } catch (error) {
       console.log(error);
-
       res.send(error);
     }
   }

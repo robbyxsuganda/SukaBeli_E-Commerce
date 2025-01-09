@@ -1,8 +1,18 @@
+const { Product, User, Category, ProductsCategory, Profile, Cart } = require("../models/index.js");
+const { Op } = require("sequelize");
+const rupiahFormatter = require("../helpers/rupiahFormatter.js");
+
 class ControllerAdmin {
   static async readProducts(req, res) {
     try {
+      const userWithProducts = await Product.findAll({
+        where: {
+          UserId: req.session.userId,
+        },
+      });
+
       // res.send("Menampilkan semua product milik si admin");
-      res.render("admin/index.ejs");
+      res.render("admin/index.ejs", { userWithProducts });
     } catch (error) {
       res.send(error);
     }
@@ -19,7 +29,8 @@ class ControllerAdmin {
 
   static async addProduct(req, res) {
     try {
-      res.send("Menambahkan data ke database");
+      const { name, description, price, stock } = req.body;
+      res.send(name, description, price, stock);
     } catch (error) {
       res.send(error);
     }
