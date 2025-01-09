@@ -35,20 +35,30 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light shadow-sm">
       <div class="container">
-        <a class="navbar-brand fw-bold" href="#">Suka Beli</a>
+        <% if (userProfile.role === "Admin") { %>
+        <a class="navbar-brand fw-bold" href="/admin">Suka Beli</a>
+        <% } %> <% if (userProfile.role === "Customer") { %>
+        <a class="navbar-brand fw-bold" href="/customer">Suka Beli</a>
+        <% } %>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
+            <% if (userProfile.role === "Customer") { %>
             <li class="nav-item">
-              <a class="nav-link active" href="#">Cart</a>
+              <a class="nav-link active" href="/customer/product/cart">Cart</a>
             </li>
+            <% } %> <% if (userProfile.role === "Admin") { %>
+            <li class="nav-item">
+              <a class="nav-link active" href="/admin/product/add">Add Product</a>
+            </li>
+            <% } %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Profile </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Logout</a></li>
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -61,15 +71,21 @@
     </nav>
 
     <!-- Profile Header -->
+    <!-- <%= JSON.stringify(userProfile) %> -->
     <div class="container mt-4">
       <div class="profile-header d-flex align-items-center">
         <img src="https://via.placeholder.com/100" class="profile-avatar me-3" alt="User Avatar" />
         <div>
-          <h3 class="fw-bold">Nama Pengguna</h3>
-          <p class="text-muted">emailpengguna@example.com</p>
+          <h3 class="fw-bold"><%= userProfile.name %></h3>
+          <p class="text-muted"><%= userProfile.email %></p>
         </div>
         <div class="ms-auto">
-          <button class="btn btn-edit-profile">Edit Profil</button>
+          <a href="/profile/<%= userProfile.id %>/edit">
+            <button class="btn btn-edit-profile">Change Photo</button>
+          </a>
+          <a href="/profile/<%= userProfile.id %>/edit">
+            <button class="btn btn-edit-profile">Edit Profil</button>
+          </a>
         </div>
       </div>
     </div>
@@ -81,11 +97,12 @@
           <div class="mb-3">
             <h5 class="fw-bold">Informasi Pribadi</h5>
             <ul class="list-group">
-              <li class="list-group-item"><strong>Nama Lengkap:</strong> Nama Pengguna</li>
-              <li class="list-group-item"><strong>Email:</strong> emailpengguna@example.com</li>
-              <li class="list-group-item"><strong>Role:</strong> Customer</li>
-              <li class="list-group-item"><strong>Nomor Telepon:</strong> +62 812 3456 7890</li>
-              <li class="list-group-item"><strong>Address</strong> Tangcity</li>
+              <li class="list-group-item"><strong>Nama Lengkap:</strong> <%= userProfile.name %></li>
+              <li class="list-group-item"><strong>Email:</strong> <%= userProfile.email %></li>
+              <li class="list-group-item"><strong>Role:</strong> <%= userProfile.role %></li>
+              <li class="list-group-item"><strong>Nomor Telepon:</strong> <%= userProfile.Profile.phoneNumber %></li>
+              <li class="list-group-item"><strong>Address:</strong> <%= userProfile.Profile.address %></li>
+              <li class="list-group-item"><strong>Bergabung Sejak:</strong> 21 agustus 2014</li>
             </ul>
           </div>
         </div>

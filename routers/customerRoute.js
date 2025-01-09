@@ -3,6 +3,8 @@ const { isCustomer } = require("../middleware/authorization.js");
 
 const router = require("express").Router();
 
+router.get("/product/buy", isCustomer, ControllerCustomer.buy);
+
 //READ
 router.get("/", isCustomer, ControllerCustomer.readProducts);
 router.get("/product/cart", isCustomer, ControllerCustomer.readCarts); // done

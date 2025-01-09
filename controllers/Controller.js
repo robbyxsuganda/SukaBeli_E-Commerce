@@ -6,7 +6,14 @@ const rupiahFormatter = require("../helpers/rupiahFormatter.js");
 class Controller {
   static async readProfile(req, res) {
     try {
-      res.render("profile.ejs");
+      const userProfile = await User.findOne({
+        include: Profile,
+        where: {
+          id: req.session.userId,
+        },
+      });
+
+      res.render("profile.ejs", { userProfile });
       // res.send("Menampilkan data users lengkap join dengan profiles");
     } catch (error) {
       res.send(error);

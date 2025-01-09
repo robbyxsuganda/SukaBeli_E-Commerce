@@ -71,8 +71,46 @@ class ControllerCustomer {
 
   static async checkoutAllProduct(req, res) {
     try {
-      res.send("Membeli semua product dicarts dan mengupdate data");
+      const carts = await Cart.findAll({
+        include: [Product, User],
+        where: {
+          UserId: req.session.userId,
+        },
+      });
+
+      if (carts.length === 0) {
+        const error = "Keranjang Belanja kamu kosong silahkan belanja terlebih dahulu!";
+        return res.redirect(`/customer/product/cart?error=${error}`);
+      }
+
+      const stockIsReady = carts.map((c) => {
+        if (c.stockProduct > c.Product.stock) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+
+      if (stockIsReady[0] === false) {
+        const error = `Mohon maaf, stok saat ini belum mencukupi untuk memenuhi permintaan Anda`;
+        return res.redirect(`/customer/product/cart?error=${error}`);
+      }
+
+      // res.send(carts);
+
+      res.render(`customer/checkout.ejs`, { carts, rupiahFormatter });
+      // res.send("Membeli semua product dicarts dan mengupdate data");
     } catch (error) {
+      res.send(error);
+    }
+  }
+
+  static async buy(req, res) {
+    try {
+      res.redirect("/customer");
+    } catch (error) {
+      console.log(error);
+
       res.send(error);
     }
   }
