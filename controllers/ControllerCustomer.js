@@ -38,6 +38,7 @@ class ControllerCustomer {
 
   static async readCarts(req, res) {
     try {
+      const { error } = req.query;
       const carts = await Cart.findAll({
         include: {
           model: Product,
@@ -51,7 +52,7 @@ class ControllerCustomer {
         order: [["createdAt", "DESC"]],
       });
 
-      res.render("customer/carts.ejs", { carts, rupiahFormatter });
+      res.render("customer/carts.ejs", { carts, rupiahFormatter, error });
       // res.send("Menampilkan carts");]
     } catch (error) {
       res.send(error);

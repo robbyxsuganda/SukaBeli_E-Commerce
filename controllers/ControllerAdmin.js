@@ -19,7 +19,6 @@ class ControllerAdmin {
         order: [["createdAt", "DESC"]],
       });
 
-      // res.send("Menampilkan semua product milik si admin");
       res.render("admin/index.ejs", { userWithProducts, rupiahFormatter });
     } catch (error) {
       res.send(error);
@@ -28,9 +27,12 @@ class ControllerAdmin {
 
   static async showAddProductForm(req, res) {
     try {
+      let errors;
+      if (req.query.errors) {
+        errors = req.query.errors.split(",");
+      }
       const categories = await Category.findAll();
-      res.render("admin/addProductForm.ejs", { categories });
-      // res.send("Menampilkan form untuk tambah product");
+      res.render("admin/addProductForm.ejs", { categories, errors });
     } catch (error) {
       res.send(error);
     }
@@ -60,7 +62,16 @@ class ControllerAdmin {
       });
       res.redirect("/admin");
     } catch (error) {
-      res.send(error);
+      console.log(error);
+
+      if (error.name === "SequelizeValidationError") {
+        const erorrs = error.errors.map((er) => {
+          return er.message;
+        });
+        res.redirect(`/admin/product/add?errors=${erorrs}`);
+      } else {
+        res.send(error);
+      }
     }
   }
 
@@ -70,7 +81,6 @@ class ControllerAdmin {
       const categories = await Category.findAll();
       const product = await Product.findByPk(id);
       res.render("admin/editProductForm.ejs", { categories, product });
-      // res.send("Menampilkan form untuk edit product");
     } catch (error) {
       res.send(error);
     }
@@ -114,9 +124,9 @@ class ControllerAdmin {
         }
       );
 
-      // res.send("Mengupdate data ke database");
       res.redirect("/admin");
     } catch (error) {
+
       res.send(error);
     }
   }
@@ -129,7 +139,6 @@ class ControllerAdmin {
           id: id,
         },
       });
-      // res.send("Menghapus data di database");
       res.redirect("/admin");
     } catch (error) {
       res.send(error);

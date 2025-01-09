@@ -21,7 +21,6 @@ class Controller {
       });
 
       res.render("profile.ejs", { userProfile });
-      // res.send("Menampilkan data users lengkap join dengan profiles");
     } catch (error) {
       res.send(error);
     }
@@ -29,6 +28,11 @@ class Controller {
 
   static async showEditProfileForm(req, res) {
     try {
+      let errors;
+      if (req.query.errors) {
+        errors = req.query.errors.split(",");
+      }
+
       const userProfile = await User.findOne({
         include: Profile,
         where: {
@@ -36,8 +40,7 @@ class Controller {
         },
       });
 
-      res.render("editProfile.ejs", { userProfile });
-      // res.send("Menampilkan data users lengkap join dengan profiles");
+      res.render("editProfile.ejs", { userProfile, errors });
     } catch (error) {
       res.send(error);
     }
@@ -72,9 +75,14 @@ class Controller {
 
       res.redirect("/profile");
     } catch (error) {
-      console.log(error);
-
-      res.send(error);
+      if (error.name === "SequelizeValidationError") {
+        const erorrs = error.errors.map((er) => {
+          return er.message;
+        });
+        res.redirect(`/profile?errors=${erorrs}`);
+      } else {
+        res.send(error);
+      }
     }
   }
 
@@ -124,7 +132,11 @@ class Controller {
 
   static async showRegister(req, res) {
     try {
-      res.render("register.ejs");
+      let errors;
+      if (req.query.errors) {
+        errors = req.query.errors.split(",");
+      }
+      res.render("register.ejs", { errors });
     } catch (error) {
       res.send(error);
     }
@@ -150,7 +162,14 @@ class Controller {
 
       res.redirect("/login");
     } catch (error) {
-      res.send(error);
+      if (error.name === "SequelizeValidationError") {
+        const erorrs = error.errors.map((er) => {
+          return er.message;
+        });
+        res.redirect(`/register?errors=${erorrs}`);
+      } else {
+        res.send(error);
+      }
     }
   }
 

@@ -59,6 +59,9 @@
     <div class="container">
       <div class="form-container">
         <h2 class="text-center mb-4">Edit Profil</h2>
+        <% if (errors) { %> <% errors.forEach(err => { %>
+        <p style="color: red"><%= err %></p>
+        <% }) %> <% } %>
         <form action="/profile/<%= userProfile.id %>/edit" method="POST" enctype="multipart/form-data">
           <!-- Name -->
           <div class="mb-3">

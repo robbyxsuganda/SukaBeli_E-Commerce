@@ -17,16 +17,72 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     // STATIC METHOD
-    
   }
   Product.init(
     {
-      name: DataTypes.STRING,
-      description: DataTypes.TEXT,
-      price: DataTypes.INTEGER,
-      stock: DataTypes.INTEGER,
-      image: DataTypes.STRING,
-      UserId: DataTypes.INTEGER,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Name cant be null",
+          },
+          notEmpty: {
+            msg: "Name cant be empty",
+          },
+        },
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Description cant be null",
+          },
+          notEmpty: {
+            msg: "Description cant be empty",
+          },
+        },
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Photo cant be null",
+          },
+          notEmpty: {
+            msg: "Photo cant be empty",
+          },
+        },
+      },
+      stock: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Photo cant be null",
+          },
+          notEmpty: {
+            msg: "Photo cant be empty",
+          },
+        },
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Image cant be null",
+          },
+          notEmpty: {
+            msg: "Image cant be empty",
+          },
+        },
+      },
+      UserId: {
+        type: DataTypes.INTEGER,
+      },
     },
     {
       sequelize,

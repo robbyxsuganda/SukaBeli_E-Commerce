@@ -57,6 +57,9 @@
     <div class="container">
       <div class="form-container">
         <h3 class="text-center fw-bold mb-4">Tambah Produk</h3>
+        <% if (errors) { %> <% errors.forEach(err => { %>
+        <p style="color: red"><%= err %></p>
+        <% }) %> <% } %>
         <form action="/admin/product/add" method="post" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="name" class="form-label">Nama Produk</label>
