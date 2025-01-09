@@ -19,6 +19,16 @@ module.exports = (sequelize, DataTypes) => {
     get uppercaseName() {
       return this.name.toUpperCase();
     }
+
+    //STATIC METHOD
+    static async findUserBySessionId(id) {
+      return User.findOne({
+        include: Profile,
+        where: {
+          id: id,
+        },
+      });
+    }
   }
   User.init(
     {

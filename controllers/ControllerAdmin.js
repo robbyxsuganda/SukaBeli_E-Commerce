@@ -1,5 +1,4 @@
 const { Product, User, Category, ProductsCategory } = require("../models/index.js");
-const { Op } = require("sequelize");
 const rupiahFormatter = require("../helpers/rupiahFormatter.js");
 const ImageKit = require("imagekit");
 
@@ -126,7 +125,6 @@ class ControllerAdmin {
 
       res.redirect("/admin");
     } catch (error) {
-
       res.send(error);
     }
   }

@@ -1,4 +1,4 @@
-const { Product, User, Category, ProductsCategory, Profile, Cart } = require("../models/index.js");
+const { Product, User, Category, Cart } = require("../models/index.js");
 const { Op } = require("sequelize");
 const rupiahFormatter = require("../helpers/rupiahFormatter.js");
 
@@ -7,27 +7,8 @@ class ControllerCustomer {
     try {
       const { search, CategoryId } = req.query;
 
-      const options = {
-        include: User,
-        order: [["createdAt", "DESC"]],
-      };
-
-      if (search) {
-        options.where = {
-          name: {
-            [Op.iLike]: `%${search}%`,
-          },
-        };
-      }
-
-      const products = await Product.findAll(options);
-
-      const categories = await Category.findAll({
-        include: {
-          model: Product,
-          through: ProductsCategory,
-        },
-      });
+      const products = await Product.findByFeature(CategoryId, search, Category, User);
+      const categories = await Category.findAll();
 
       res.render("customer/index.ejs", { products, rupiahFormatter, categories });
     } catch (error) {

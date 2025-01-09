@@ -1,6 +1,5 @@
-const { Product, User, Category, ProductsCategory, Profile } = require("../models/index.js");
+const { Product, User, Category, Profile } = require("../models/index.js");
 const bcryptjs = require("bcryptjs");
-const { Op } = require("sequelize");
 const rupiahFormatter = require("../helpers/rupiahFormatter.js");
 const ImageKit = require("imagekit");
 
@@ -184,43 +183,8 @@ class Controller {
 
   static async readProducts(req, res) {
     try {
-      const { search, CategoryId } = req.query; 
-
-      const options = {
-        include: [
-          {
-            model: User, 
-          },
-          {
-            model: Category, 
-            through: { attributes: [] }, 
-          },
-        ],
-        order: [["createdAt", "DESC"]],
-      };
-
-      if (search) {
-        options.where = {
-          name: {
-            [Op.iLike]: `%${search}%`,
-          },
-        };
-      }
-
-      if (CategoryId) {
-        options.include[1].where = { id: CategoryId }; // Tambahkan filter kategori
-      }
-
-      if (search && CategoryId) {
-        options.where = {
-          name: {
-            [Op.iLike]: `%${search}%`,
-          },
-        };
-        options.include[1].where = { id: CategoryId };
-      }
-
-      const products = await Product.findAll(options);
+      const { search, CategoryId } = req.query;
+      const products = await Product.findByFeature(CategoryId, search, Category, User);
       const categories = await Category.findAll();
 
       res.render("index.ejs", { products, rupiahFormatter, categories });

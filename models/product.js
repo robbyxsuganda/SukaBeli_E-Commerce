@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { Op } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     /**
@@ -17,6 +18,42 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     // STATIC METHOD
+    static async findByFeature(CategoryId, search, Category, User) {
+      const options = {
+        include: [
+          {
+            model: User,
+          },
+          {
+            model: Category,
+            through: { attributes: [] },
+          },
+        ],
+        order: [["createdAt", "DESC"]],
+      };
+
+      if (search) {
+        options.where = {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
+        };
+      }
+
+      if (CategoryId) {
+        options.include[1].where = { id: CategoryId };
+      }
+
+      if (search && CategoryId) {
+        options.where = {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
+        };
+        options.include[1].where = { id: CategoryId };
+      }
+      return Product.findAll(options);
+    }
   }
   Product.init(
     {
