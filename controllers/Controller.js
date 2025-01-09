@@ -142,8 +142,8 @@ class Controller {
       });
 
       await Profile.create({
-        phoneNumber: "+62",
-        address: "Tangcity",
+        phoneNumber: "",
+        address: "",
         photo: "https://i.pinimg.com/736x/f1/e6/3c/f1e63cfd56fcf2b10be4444ee5963ca9.jpg",
         UserId: newUser.id,
       });

@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Cart, { foreignKey: "UserId" });
       User.belongsToMany(models.Product, { through: "Cart" });
     }
+    // GETTER
+    get uppercaseName() {
+      return this.name.toUpperCase();
+    }
   }
   User.init(
     {

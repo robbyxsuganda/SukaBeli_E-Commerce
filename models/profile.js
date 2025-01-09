@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Profile.belongsTo(models.User, { foreignKey: "UserId" });
     }
+
+    // INSTANCE METHOD
+    locationWithPhase() {
+      return `BSD-${this.phase}`;
+    }
   }
   Profile.init(
     {
