@@ -184,10 +184,18 @@ class Controller {
 
   static async readProducts(req, res) {
     try {
-      const { search } = req.query;
+      const { search, CategoryId } = req.query; 
 
       const options = {
-        include: User,
+        include: [
+          {
+            model: User, 
+          },
+          {
+            model: Category, 
+            through: { attributes: [] }, 
+          },
+        ],
         order: [["createdAt", "DESC"]],
       };
 
@@ -197,6 +205,19 @@ class Controller {
             [Op.iLike]: `%${search}%`,
           },
         };
+      }
+
+      if (CategoryId) {
+        options.include[1].where = { id: CategoryId }; // Tambahkan filter kategori
+      }
+
+      if (search && CategoryId) {
+        options.where = {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
+        };
+        options.include[1].where = { id: CategoryId };
       }
 
       const products = await Product.findAll(options);
