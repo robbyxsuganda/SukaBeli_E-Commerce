@@ -1,4 +1,4 @@
-const { Product, User, Category, ProductsCategory, Profile, Cart } = require("../models/index.js");
+const { Product, User, Category, ProductsCategory } = require("../models/index.js");
 const { Op } = require("sequelize");
 const rupiahFormatter = require("../helpers/rupiahFormatter.js");
 const ImageKit = require("imagekit");
@@ -65,7 +65,11 @@ class ControllerAdmin {
 
   static async showEditProductForm(req, res) {
     try {
-      res.send("Menampilkan form untuk edit product");
+      const { id } = req.params;
+      const categories = await Category.findAll();
+      const product = await Product.findByPk(id);
+      res.render("admin/editProductForm.ejs", { categories, product });
+      // res.send("Menampilkan form untuk edit product");
     } catch (error) {
       res.send(error);
     }
@@ -73,7 +77,44 @@ class ControllerAdmin {
 
   static async editProduct(req, res) {
     try {
-      res.send("Mengupdate data ke database");
+      const { id } = req.params;
+
+      const { name, price, stock, CategoryId, description } = req.body;
+
+      const data = await imagekit.upload({
+        file: req.file.buffer, //required
+        fileName: req.file.originalname, //required
+      });
+
+      await Product.update(
+        {
+          name,
+          price,
+          stock,
+          description,
+          image: data.url,
+          UserId: req.session.userId,
+        },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+
+      await ProductsCategory.update(
+        {
+          CategoryId: CategoryId,
+        },
+        {
+          where: {
+            ProductId: id,
+          },
+        }
+      );
+
+      // res.send("Mengupdate data ke database");
+      res.redirect("/admin");
     } catch (error) {
       res.send(error);
     }
@@ -81,7 +122,14 @@ class ControllerAdmin {
 
   static async deleteProduct(req, res) {
     try {
-      res.send("Menghapus data di database");
+      const { id } = req.params;
+      await Product.destroy({
+        where: {
+          id: id,
+        },
+      });
+      // res.send("Menghapus data di database");
+      res.redirect("/admin");
     } catch (error) {
       res.send(error);
     }

@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <%= JSON.stringify(userWithProducts) %>
+    <!-- <%= JSON.stringify(userWithProducts) %> -->
     <!-- Product List -->
     <div class="container mt-5">
       <% if (userWithProducts.length === 0) { %>
@@ -64,20 +64,21 @@
         <p class="text-muted">Yuk, tambahkan produk mu!</p>
         <a href="/admin/product/add" class="btn btn-primary">Add Product</a>
       </div>
-      <% } %>
+      <% } else { %>
       <h2 class="fw-bold mb-4">Produk Anda</h2>
+      <% } %>
       <div class="row g-4">
         <% userWithProducts.forEach(el => { %>
         <div class="col-md-3">
           <!-- Product Card -->
           <div class="card product-card">
-            <img style="min-height: 250px" src="<%= el.image %>" class="card-img-top" alt="Product 4" />
+            <img style="min-height: 300px" src="<%= el.image %>" class="card-img-top" alt="Product 4" />
             <div class="card-body">
               <h5 class="card-title"><%= el.name %></h5>
               <p class="card-text"><%= rupiahFormatter(el.price) %></p>
               <div class="d-flex justify-content-between">
-                <a href="/admin/product/1/edit" class="btn btn-primary w-50 me-1">Edit</a>
-                <a href="/admin/product/2/delete" class="btn btn-danger w-50 ms-1">Delete</a>
+                <a href="/admin/product/<%= el.id %>/edit" class="btn btn-primary w-50 me-1">Edit</a>
+                <a href="/admin/product/<%= el.id %>/delete" class="btn btn-danger w-50 ms-1">Delete</a>
               </div>
             </div>
           </div>
