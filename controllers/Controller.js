@@ -157,7 +157,7 @@ class Controller {
   static async logout(req, res) {
     try {
       req.session.destroy();
-      res.redirect("/login");
+      res.redirect("/");
     } catch (error) {
       res.send(error);
     }
@@ -165,17 +165,13 @@ class Controller {
 
   static async readProducts(req, res) {
     try {
-      const { search, CategoryId } = req.query;
+      const { search } = req.query;
 
       const options = {
-        include: [
-          {
-            model: User,
-            require: true,
-          },
-        ],
-        order: [["createdAt", "ASC"]],
+        include: User,
+        order: [["createdAt", "DESC"]],
       };
+
       if (search) {
         options.where = {
           name: {
@@ -185,20 +181,7 @@ class Controller {
       }
 
       const products = await Product.findAll(options);
-
-      const categories = await Category.findAll({
-        include: {
-          model: Product,
-          through: ProductsCategory,
-        },
-      });
-
-      // if (CategoryId) {
-      //   options.where = {
-      //     name: category,
-      //   };
-      // }
-      // res.send(categories);
+      const categories = await Category.findAll();
 
       res.render("index.ejs", { products, rupiahFormatter, categories });
     } catch (error) {
@@ -208,3 +191,13 @@ class Controller {
   }
 }
 module.exports = Controller;
+
+// const categoriesProducts = await Category.findAll({
+//   include: {
+//     model: Product,
+//     through: ProductsCategory,
+//   },
+//   where: {
+//     id: CategoryId,
+//   },
+// });

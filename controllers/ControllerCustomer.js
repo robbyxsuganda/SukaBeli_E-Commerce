@@ -8,13 +8,8 @@ class ControllerCustomer {
       const { search, CategoryId } = req.query;
 
       const options = {
-        include: [
-          {
-            model: User,
-            require: true,
-          },
-        ],
-        order: [["createdAt", "ASC"]],
+        include: User,
+        order: [["createdAt", "DESC"]],
       };
 
       if (search) {

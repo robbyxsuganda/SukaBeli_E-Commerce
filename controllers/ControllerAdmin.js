@@ -16,6 +16,7 @@ class ControllerAdmin {
         where: {
           UserId: req.session.userId,
         },
+        order: [["createdAt", "DESC"]],
       });
 
       // res.send("Menampilkan semua product milik si admin");
