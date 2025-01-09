@@ -2,6 +2,13 @@ const { Product, User, Category, ProductsCategory, Profile } = require("../model
 const bcryptjs = require("bcryptjs");
 const { Op } = require("sequelize");
 const rupiahFormatter = require("../helpers/rupiahFormatter.js");
+var ImageKit = require("imagekit");
+
+var imagekit = new ImageKit({
+  publicKey: "public_Y/YZ4FXQ7A1LZgggMCB1pqcgIWA=",
+  privateKey: "private_CvjVhs5BI8eR1hsdqi+eVHnsTbs=",
+  urlEndpoint: "https://ik.imagekit.io/dm8xthnq9/",
+});
 
 class Controller {
   static async readProfile(req, res) {
@@ -16,6 +23,58 @@ class Controller {
       res.render("profile.ejs", { userProfile });
       // res.send("Menampilkan data users lengkap join dengan profiles");
     } catch (error) {
+      res.send(error);
+    }
+  }
+
+  static async showEditProfileForm(req, res) {
+    try {
+      const userProfile = await User.findOne({
+        include: Profile,
+        where: {
+          id: req.session.userId,
+        },
+      });
+
+      res.render("editProfile.ejs", { userProfile });
+      // res.send("Menampilkan data users lengkap join dengan profiles");
+    } catch (error) {
+      res.send(error);
+    }
+  }
+
+  static async editProfile(req, res) {
+    try {
+      const { name, email, phoneNumber, address } = req.body;
+      req.session.email = email;
+
+      const data = await imagekit.upload({
+        file: req.file.buffer, //required
+        fileName: req.file.originalname, //required
+      });
+
+      await User.update(
+        { email, name },
+        {
+          where: {
+            id: req.session.userId,
+          },
+        }
+      );
+
+      await Profile.update(
+        { phoneNumber, address, photo: data.url },
+        {
+          where: {
+            UserId: req.session.userId,
+          },
+        }
+      );
+
+      res.redirect("/profile");
+    } catch (error) {
+      console.log(error);
+
       res.send(error);
     }
   }
@@ -43,6 +102,7 @@ class Controller {
         if (isValidPassword) {
           req.session.user = { id: user.id, role: user.role, email: user.email };
           req.session.userId = user.id;
+          req.session.email = user.email;
           if (user.role === "Admin") {
             return res.redirect("/admin");
           } else if (user.role === "Customer") {
