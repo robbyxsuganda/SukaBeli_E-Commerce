@@ -86,11 +86,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Photo cant be null",
+            msg: "Price cant be null",
           },
           notEmpty: {
-            msg: "Photo cant be empty",
+            msg: "Price cant be empty",
           },
+        },
+        isInt: {
+          msg: "Price needs to be a number.",
         },
       },
       stock: {
@@ -102,6 +105,9 @@ module.exports = (sequelize, DataTypes) => {
           },
           notEmpty: {
             msg: "Photo cant be empty",
+          },
+          isInt: {
+            msg: "Stock needs to be a number.",
           },
         },
       },

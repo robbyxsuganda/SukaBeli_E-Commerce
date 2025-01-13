@@ -75,6 +75,7 @@
             <div class="card-body">
               <h5 class="card-title"><%= el.name %></h5>
               <p class="card-text"><%= rupiahFormatter(el.price) %></p>
+              <p class="card-text">Stokc Tersedia: <%= el.stock %></p>
               <div class="d-flex justify-content-between">
                 <a href="/admin/product/<%= el.id %>/edit" class="btn btn-primary w-50 me-1">Edit</a>
                 <a href="/admin/product/<%= el.id %>/delete" class="btn btn-danger w-50 ms-1">Delete</a>

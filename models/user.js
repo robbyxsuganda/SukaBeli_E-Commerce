@@ -74,15 +74,17 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "Password cant be empty",
           },
+          isStrongPassword(value) {
+            const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+            if (!strongPasswordRegex.test(value)) {
+              throw new Error("Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character");
+            }
+          },
         },
       },
       role: {
         type: DataTypes.STRING,
         allowNull: false,
-        isIn: {
-          args: [["Admin", "Customer"]],
-          msg: "Must be English or Chinese",
-        },
         validate: {
           notNull: {
             msg: "Role cant be null",
@@ -90,6 +92,10 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "Role cant be empty",
           },
+        },
+        isIn: {
+          args: [["Admin", "Customer"]],
+          msg: "Must be English or Chinese",
         },
       },
     },

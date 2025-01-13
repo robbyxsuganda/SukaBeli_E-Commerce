@@ -72,12 +72,12 @@
               <p class="text-muted mb-1"><%= rupiahFormatter(c.Product.price) %></p>
               <p class="text-muted mb-1">Stock : <%= c.Product.stock %></p>
               <div class="d-flex align-items-center">
-                <a href="/customer/product/<%= c.ProductId %>/incrementStock">
-                  <button class="btn btn-sm btn-outline-secondary me-2">+</button>
-                </a>
-                <span><%= c.stockProduct %></span>
                 <a href="/customer/product/<%= c.ProductId %>/decrementStock">
                   <button class="btn btn-sm btn-outline-secondary ms-2">-</button>
+                </a>
+                <span><%= c.stockProduct %></span>
+                <a href="/customer/product/<%= c.ProductId %>/incrementStock">
+                  <button class="btn btn-sm btn-outline-secondary me-2">+</button>
                 </a>
               </div>
             </div>
